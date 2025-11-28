@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Gatito Bonito ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --pink: #ff9a9e;
+            --soft-pink: #fad0c4;
+            --white: #ffffff;
+            --text: #d63384;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden; /* Para que los corazones no creen scroll */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Contenedor Principal tipo Carta */
+        .love-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            border: 2px solid white;
+            backdrop-filter: blur(5px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--text);
+            margin: 0;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* Avatar del Gatito */
+        .cat-avatar {
+            font-size: 5rem;
+            color: #ff6b6b;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .message {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        /* Botón Mágico */
+        .btn-love {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 105, 135, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-love:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 105, 135, 0.5);
+        }
+
+        .btn-love:active {
+            transform: scale(0.95);
+        }
+
+        /* Corazones Flotantes (Animación JS) */
+        .heart {
+            position: absolute;
+            color: #ff6b6b;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Firma */
+        .signature {
+            margin-top: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #d63384;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="love-card">
+        <div class="cat-avatar">
+            <i class="fa-solid fa-cat"></i>
+        </div>
+        <h1>Alejandro</h1>
+        <p class="subtitle">Mi gatito bonito 🐱</p>
+        
+        <p class="message">
+            Tal vez no te lo digo a cada segundo (aunque debería), pero eres mi coincidencia favorita. Gracias por ser tú y por dejarme ser tu <span class="highlight">Megumi</span>.
+            <br><br>
+            Presiona el botón si quieres saber cuánto te quiero...
+        </p>
+
+        <button class="btn-love" onclick="lluviaDeAmor()">¡Te Amo! ❤️</button>
+
+        <div class="signature">
+            Con amor, Megumi.
+        </div>
+    </div>
+
+    <script>
+        function lluviaDeAmor() {
+            // Crear corazones y patitas
+            const symbols = ['❤️', '💖', '😻', '🐾', '😽', '💕'];
+            const container = document.body;
+            
+            // Sonido ficticio (vibración en móviles si soportado)
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+
+            // Crear 50 elementos flotantes
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                    
+                    // Posición aleatoria horizontal
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = -50 + 'px'; // Empiezan arriba de la pantalla
+                    
+                    // Tamaño aleatorio
+                    heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                    
+                    // Duración de caída aleatoria
+                    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    
+                    container.appendChild(heart);
+
+                    // Eliminar el elemento después de la animación para no llenar la memoria
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5000);
+                }, i * 100); // Retraso entre cada corazón
+            }
+        }
+    </script>
+</body>
+</html>
